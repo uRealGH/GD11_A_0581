@@ -1,4 +1,4 @@
-package com.example.gd11_a_0581.volley
+package com.example.gd11_a_0581
 
 import android.content.Intent
 import android.os.Bundle
@@ -16,8 +16,6 @@ import com.example.gd11_a_0581.api.MahasiswaApi
 import com.example.gd11_a_0581.models.Mahasiswa
 import com.google.gson.Gson
 import org.json.JSONObject
-//import com.example.gd11_a_0581.volley.api.MahasiswaApi
-//import com.example.gd11_a_0581.volley.models.Mahasiswa
 //import org.JSONObject
 import java.nio.charset.StandardCharsets
 
@@ -87,28 +85,28 @@ class AddEditActivity : AppCompatActivity() {
             StringRequest(Method.GET, MahasiswaApi.GET_BY_ID_URL + id, Response.Listener { response ->
                 val gson = Gson()
                 val mahasiswa = gson.fromJson(response, Mahasiswa::class.java)
-                
+
                 etNama!!.setText(mahasiswa.nama)
                 etNPM!!.setText(mahasiswa.npm)
                 edFakultas!!.setText(mahasiswa.fakultas)
                 edProdi!!.setText(mahasiswa.prodi)
                 setExposedDropDownMenu()
-                
+
                 Toast.makeText(this@AddEditActivity, "Data berhasil diambil!", Toast.LENGTH_SHORT).show()
                 setLoading(false)
             }, Response.ErrorListener { error ->
-                 setLoading(false)
-                    try{
-                        val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
-                        val errors = JSONObject(responseBody)
-                        Toast.makeText(
-                            this@AddEditActivity,
-                            errors.getString("message"),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    } catch (e: Exception) {
-                        Toast.makeText(this@AddEditActivity, e.message, Toast.LENGTH_SHORT).show()
-                    }
+                setLoading(false)
+                try{
+                    val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
+                    val errors = JSONObject(responseBody)
+                    Toast.makeText(
+                        this@AddEditActivity,
+                        errors.getString("message"),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } catch (e: Exception) {
+                    Toast.makeText(this@AddEditActivity, e.message, Toast.LENGTH_SHORT).show()
+                }
             }) {
             @Throws(AuthFailureError::class)
             override fun getHeaders(): Map<String, String> {

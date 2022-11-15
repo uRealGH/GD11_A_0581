@@ -1,4 +1,4 @@
-package com.example.gd11_a_0581.volley
+package com.example.gd11_a_0581
 
 import android.content.Intent
 import android.os.Bundle
@@ -21,9 +21,7 @@ import com.example.gd11_a_0581.api.MahasiswaApi
 import com.example.gd11_a_0581.models.Mahasiswa
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
-import com.example.gd11_a_0581.volley.adapters.MahasiswaAdapter
-//import com.example.gd11_a_0581.volley.api.MahasiswaApi
-//import com.example.gd11_a_0581.volley.models.Mahasiswa
+import com.example.gd11_a_0581.adapters.MahasiswaAdapter
 import org.json.JSONObject
 import java.nio.charset.StandardCharsets
 
@@ -143,8 +141,8 @@ class MainActivity : AppCompatActivity() {
             // Menambahkan header pada request
             @Throws(AuthFailureError::class)
             override fun getHeaders(): Map<String, String> {
-                val headers = java.util.HashMap<String, String>()
-                val headers ["Accept"] = "application/json"
+                val headers: HashMap<String, String> = HashMap<String, String>()
+                headers ["Accept"] = "application/json"
                 return headers
             }
         }

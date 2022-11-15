@@ -1,4 +1,4 @@
-package com.example.gd11_a_0581.volley.adapters
+package com.example.gd11_a_0581.adapters
 
 import android.content.Context
 import android.content.Intent
@@ -10,9 +10,9 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gd11_a_0581.R
 import com.example.gd11_a_0581.models.Mahasiswa
+import com.example.gd11_a_0581.AddEditActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.example.gd11_a_0581.volley.AddEditActivity
-import com.example.gd11_a_0581.volley.MainActivity
+import com.example.gd11_a_0581.MainActivity
 //import com.example.gd11_a_0581.volley.R
 //import com.example.gd11_a_0581.volley.models.Mahasiswa
 import java.util.*
@@ -92,7 +92,7 @@ class MahasiswaAdapter (private var mahasiswaList : List<Mahasiswa>, context: Co
                 return filterResults
             }
 
-            override fun publisResults(charSequence: CharSequence, filterResults: FilterResults) {
+            override fun publishResults(charSequence: CharSequence, filterResults: FilterResults) {
                 filteredMahasiswaList.clear()
                 filteredMahasiswaList.addAll((filterResults.values as List<Mahasiswa>))
                 notifyDataSetChanged()
