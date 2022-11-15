@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.gd11_a_0581.R
+import com.example.gd11_a_0581.models.Mahasiswa
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.example.gd11_a_0581.volley.AddEditActivity
 import com.example.gd11_a_0581.volley.MainActivity
-import com.example.gd11_a_0581.volley.R
-import com.example.gd11_a_0581.volley.models.Mahasiswa
+//import com.example.gd11_a_0581.volley.R
+//import com.example.gd11_a_0581.volley.models.Mahasiswa
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -34,7 +36,7 @@ class MahasiswaAdapter (private var mahasiswaList : List<Mahasiswa>, context: Co
     }
 
     override fun getItemCount(): Int {
-        return filteredMahasiwaList.size
+        return filteredMahasiswaList.size
     }
 
     fun setMahasiswaList(mahasiswaList: Array<Mahasiswa>) {
@@ -56,7 +58,7 @@ class MahasiswaAdapter (private var mahasiswaList : List<Mahasiswa>, context: Co
                 .setNegativeButton("Batal", null)
                 .setPositiveButton("Hapus") { _, _ ->
                     if(context is MainActivity) mahasiswa.id?.let { it1 ->
-                        context.deleteMahasiwa(
+                        context.deleteMahasiswa(
                             it1
                         )
                     }

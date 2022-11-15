@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     private var queue: RequestQueue? = null
 
     companion object {
-        const val LAUNCH_ADD_ACtivity = 123
+        const val LAUNCH_ADD_ACTIVITY = 123
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         val fabAdd = findViewById<FloatingActionButton>(R.id.fab_add)
         fabAdd.setOnClickListener {
             val i = Intent(this@MainActivity, AddEditActivity::class.java)
-            startActivityForResult(i, LAUNCH_ADD_ACtivity)
+            startActivityForResult(i, LAUNCH_ADD_ACTIVITY)
         }
 
         val rvProduk = findViewById<RecyclerView>(R.id.rv_mahasiswa)
@@ -75,11 +75,11 @@ class MainActivity : AppCompatActivity() {
     private fun allMahasiswa() {
         srMahasiswa!!.isRefreshing = true
         val stringRequest: StringRequest = object :
-            StringRequest(Method.GET, MahasiswaApi.GET_ALL_URL, Response,Listener { response ->
+            StringRequest(Method.GET, MahasiswaApi.GET_ALL_URL, Response.Listener { response ->
                 val gson = Gson()
                 var mahasiswa : Array<Mahasiswa> = gson.fromJson(response, Array<Mahasiswa>::class.java)
 
-                adapter!.setMahasiswaList(mahasiswa)
+                adapter!!.setMahasiswaList(mahasiswa)
                 adapter!!.filter.filter(svMahasiswa!!.query)
                 srMahasiswa!!.isRefreshing = false
 
@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this@MainActivity, "Data Kosong!", Toast.LENGTH_SHORT)
                         .show()
             }, Response.ErrorListener { error ->
-                srMahasiswa!.isRefreshing = false
+                srMahasiswa!!.isRefreshing = false
                 try{
                     val responseBody =
                         String(error.networkResponse.data, StandardCharsets.UTF_8)
@@ -144,7 +144,7 @@ class MainActivity : AppCompatActivity() {
             @Throws(AuthFailureError::class)
             override fun getHeaders(): Map<String, String> {
                 val headers = java.util.HashMap<String, String>()
-                val headers["Accept"] = "application/json"
+                val headers ["Accept"] = "application/json"
                 return headers
             }
         }
@@ -153,7 +153,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == LAUNCH_ADD_ACtivity && resultCode == RESULT_OK) allMahasiswa()
+        if (requestCode == LAUNCH_ADD_ACTIVITY && resultCode == RESULT_OK) allMahasiswa()
     }
 
     // Fungsi ini digunakan menampilkan layout loading
@@ -163,7 +163,7 @@ class MainActivity : AppCompatActivity() {
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
             )
-            layoutLoading!.visibility = View.VISIBLE
+            layoutLoading!!.visibility = View.VISIBLE
         } else {
             window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
             layoutLoading!!.visibility = View.GONE
