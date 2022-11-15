@@ -16,20 +16,23 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.example.gd11_a_0581.R
+import com.example.gd11_a_0581.api.MahasiswaApi
+import com.example.gd11_a_0581.models.Mahasiswa
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import com.example.gd11_a_0581.volley.adapters.MahasiswaAdapter
-import com.example.gd11_a_0581.volley.api.MahasiswaApi
-import com.example.gd11_a_0581.volley.models.Mahasiswa
+//import com.example.gd11_a_0581.volley.api.MahasiswaApi
+//import com.example.gd11_a_0581.volley.models.Mahasiswa
 import org.json.JSONObject
 import java.nio.charset.StandardCharsets
 
 class MainActivity : AppCompatActivity() {
-    private var srMahasiswaAdapter: SwipeRefreshLayout? = null
+    private var srMahasiswa: SwipeRefreshLayout? = null
     private var adapter: MahasiswaAdapter? = null
     private var svMahasiswa: SearchView? = null
     private var layoutLoading: LinearLayout? = null
-    private var queue: RequestQueue = null
+    private var queue: RequestQueue? = null
 
     companion object {
         const val LAUNCH_ADD_ACtivity = 123
@@ -58,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
         val fabAdd = findViewById<FloatingActionButton>(R.id.fab_add)
         fabAdd.setOnClickListener {
-            val 1 = Intent(this@MainActivity, AddEditActivity::class.java)
+            val i = Intent(this@MainActivity, AddEditActivity::class.java)
             startActivityForResult(i, LAUNCH_ADD_ACtivity)
         }
 
@@ -115,7 +118,7 @@ class MainActivity : AppCompatActivity() {
     fun deleteMahasiswa(id: Long) {
         setLoading(true)
         val stringRequest: StringRequest = object :
-            StringRequest(Method.DELETE, MahasiswaApi.DELEE_URL + id, Response.Listener { response ->
+            StringRequest(Method.DELETE, MahasiswaApi.DELETE_URL + id, Response.Listener { response ->
                 setLoading(false)
 
                 val gson = Gson()

@@ -11,10 +11,14 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.example.gd11_a_0581.R
+import com.example.gd11_a_0581.api.MahasiswaApi
+import com.example.gd11_a_0581.models.Mahasiswa
 import com.google.gson.Gson
-import com.example.gd11_a_0581.volley.api.MahasiswaApi
-import com.example.gd11_a_0581.volley.models.Mahasiswa
-import org.JSONObject
+import org.json.JSONObject
+//import com.example.gd11_a_0581.volley.api.MahasiswaApi
+//import com.example.gd11_a_0581.volley.models.Mahasiswa
+//import org.JSONObject
 import java.nio.charset.StandardCharsets
 
 class AddEditActivity : AppCompatActivity() {
@@ -37,13 +41,13 @@ class AddEditActivity : AppCompatActivity() {
     private var layoutLoading: LinearLayout? = null
     private var queue: RequestQueue? = null
 
-    override fun onCreate(savedInstanceState: Bunde?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_edit)
 
         // Pendeklarasian request queue
         queue = Volley.newRequestQueue(this)
-        etNama = findViewById(R.id.etNama)
+        etNama = findViewById(R.id.et_nama)
         etNPM = findViewById(R.id.et_npm)
         edFakultas = findViewById(R.id.ed_fakultas)
         edProdi = findViewById(R.id.ed_prodi)
@@ -55,7 +59,7 @@ class AddEditActivity : AppCompatActivity() {
         btnCancel.setOnClickListener { finish() }
         val btnSave = findViewById<Button>(R.id.btn_save)
         val tvTitle = findViewById<TextView>(R.id.tv_title)
-        val id - intent.getLongExtra("id", -1)
+        val id = intent.getLongExtra("id", -1)
         if(id == -1L) {
             tvTitle.setText("Tambah Mahasiswa")
             btnSave.setOnClickListener { createMahasiswa() }
@@ -80,7 +84,7 @@ class AddEditActivity : AppCompatActivity() {
         //Fungsi untuk menampilkan data mahasiswa berdasarkan id
         setLoading(true)
         val stringRequest: StringRequest = object :
-            StringRequest(Method.GET, MahasiswaAPI.GET_BY_ID_URL + id, Response.Listener { response ->
+            StringRequest(Method.GET, MahasiswaApi.GET_BY_ID_URL + id, Response.Listener { response ->
                 val gson = Gson()
                 val mahasiswa = gson.fromJson(response, Mahasiswa::class.java)
                 
